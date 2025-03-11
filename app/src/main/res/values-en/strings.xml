@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ShiSo</string>
+    <string name="homescreenLine1">Welcome to the app!</string>
+    <string name="homescreenLine2">Your journey begins here.</string>
+    <string name="homescreenLine3">Stay healthy and fit.</string>
+    <string name="homescreenLine4">Join our community.</string>
+    <string name="createAccountButton">Create Account</string>
+    <string name="alreadyHaveAccount">Already have an account?</string>
+</resources>

@@ -1,3 +1,11 @@
+
+
 <resources>
     <string name="app_name">ShiSo</string>
+    <string name="homescreenLine1">Chào mừng bạn đến với ứng dụng!</string>
+    <string name="homescreenLine2">Hành trình của bạn bắt đầu tại đây.</string>
+    <string name="homescreenLine3">Giữ gìn sức khỏe và vóc dáng.</string>
+    <string name="homescreenLine4">Tham gia cộng đồng của chúng tôi.</string>
+    <string name="createAccountButton">Tạo tài khoản</string>
+    <string name="alreadyHaveAccount">Bạn đã có tài khoản?</string>
 </resources>

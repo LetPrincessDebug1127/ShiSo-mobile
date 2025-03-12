@@ -8,6 +8,6 @@
     <string name="homescreenLine4">và những “chiến lược” an toàn nhất</string>
     <string name="createAccountButton">Tạo tài khoản</string>
     <string name="alreadyHaveAccount">Đã có tài khoản?</string>
-    <string name="loginWithGmail">Tạo tài khoản ShiSo</string>
+    <string name="loginWithGmail">Đăng nhập bằng Gmail</string>
 
 </resources>

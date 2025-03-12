@@ -1,6 +1,5 @@
 package com.example.shiso.ui
 
-import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -20,8 +19,16 @@ import utils.LanguageUtils
 import androidx.compose.foundation.Image
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.example.shiso.R
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.withStyle
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.TextStyle
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -44,10 +51,13 @@ fun HomeScreen(navController: NavController) {
         modifier = Modifier
             .fillMaxSize()
             .background(Color(0xFFEDF9ED))
-            .padding(20.dp),
+            .fillMaxHeight(0.8f)
+            .padding(horizontal = 20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Top
     ) {
+        val screenHeight = LocalConfiguration.current.screenHeightDp.dp
+        Spacer(modifier = Modifier.height(screenHeight * 0.1f))
         ImageHomeScreen1()
         Text(
             text = strings["homescreenLine1"] ?: "",
@@ -55,54 +65,40 @@ fun HomeScreen(navController: NavController) {
             fontSize = 16.sp,
             color = Color(0xFF000000)
         )
+        Spacer(modifier = Modifier.height(30.dp))
+
         ImageHomeScreen2()
         Text(
-            text = strings["homescreenLine2"] ?: "",
-            fontStyle = FontStyle.Italic,
-            fontSize = 16.sp,
-            color = Color(0xFF000000)
-        )
-        Text(
-            text = strings["homescreenLine3"] ?: "",
-            fontStyle = FontStyle.Italic,
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
-            color = Color(0xFF000000)
-        )
-        Text(
-            text = strings["homescreenLine4"] ?: "",
-            fontStyle = FontStyle.Italic,
-            fontSize = 16.sp,
-            color = Color(0xFF000000)
-        )
-
-        Button(onClick = { navController.navigate("CreateAccount") }) {
-            Text(text = strings["createAccountButton"] ?: "")
-        }
-
-        Text(
-            text = strings["alreadyHaveAccount"] ?: "",
-            fontWeight = FontWeight.Bold,
-            fontSize = 16.sp,
-            color = Color(0xFF000000),
-            modifier = Modifier.clickable { navController.navigate("LogInAccount") }
-        )
-
-        GoogleLoginButton(
-            buttonText = strings["loginWithGmail"] ?: "",
-            onSuccess = { user ->
-                println("Logged in successfully: $user")
-                navController.navigate("CheckSkinScreen")
+            text = buildAnnotatedString {
+                append(strings["homescreenLine2"] ?: "")
+                append(" ")
+                withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                    append(strings["homescreenLine3"] ?: "")
+                }
+                append(" ")
+                append(strings["homescreenLine4"] ?: "")
             },
-            onError = { error ->
-                println("Login failed: $error")
-            }
+            fontStyle = FontStyle.Italic,
+            fontSize = 16.sp,
+            color = Color(0xFF000000)
         )
-
-
+        Spacer(modifier = Modifier.height(30.dp))
+        Box(
+            modifier = Modifier
+                .background(Color.Transparent)
+                .clickable { /* Xử lý sự kiện click*/ }
+        ) {
+            BasicText(
+                text = AnnotatedString(strings["loginWithGmail"] ?: ""),
+                style = TextStyle(color = Color(0xFF248A50), fontSize = 20.sp, fontWeight = FontWeight.Bold,
+                ),
+            )
+        }
+        Spacer(modifier = Modifier.height(10.dp))
         Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
             Text(
                 text = "EN",
+                color = Color(0xFF248A50),
                 modifier = Modifier.clickable {
                     language = "en"
                     LanguageUtils.setLocale(context, "en")
@@ -111,12 +107,14 @@ fun HomeScreen(navController: NavController) {
             Text(text = " | ", color = Color(0xFF248A50))
             Text(
                 text = "VI",
+                color = Color(0xFF248A50),
                 modifier = Modifier.clickable {
                     language = "vi"
                     LanguageUtils.setLocale(context, "vi")
                 }
             )
         }
+
 
         Text(
             text = "Test check skin screen",
@@ -139,8 +137,12 @@ fun ImageHomeScreen1() {
     Image(
         painter = painterResource(id = R.drawable.homesreen1),
         contentDescription = "Shiso Homescreen",
-        modifier = Modifier.size(200.dp)
+        contentScale = ContentScale.Fit, // Giữ nguyên kích thước ảnh
+        modifier = Modifier
+            .fillMaxWidth()   // Chiếm toàn bộ chiều ngang
+            .heightIn(min = 250.dp) // Đặt chiều cao tối thiểu
     )
+
 }
 
 @Composable
@@ -148,6 +150,28 @@ fun ImageHomeScreen2() {
     Image(
         painter = painterResource(id = R.drawable.homescreen2),
         contentDescription = "Shiso Homescreen",
-        modifier = Modifier.size(200.dp)
+        contentScale = ContentScale.Fit, // Giữ nguyên kích thước ảnh
+        modifier = Modifier
+            .fillMaxWidth()   // Chiếm toàn bộ chiều ngang
+            .heightIn(min = 250.dp) // Đặt chiều cao tối thiểu
     )
 }
+
+
+// Để sau này làm, giờ lười
+//        Button(
+//            onClick = { navController.navigate("CreateAccount") },
+//            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF248A50))
+//        ) {
+//            Text(text = strings["createAccountButton"] ?: "")
+//        }
+//
+//
+//
+//        Text(
+//            text = strings["alreadyHaveAccount"] ?: "",
+//            fontWeight = FontWeight.Bold,
+//            fontSize = 16.sp,
+//            color = Color(0xFF000000),
+//            modifier = Modifier.clickable { navController.navigate("LogInAccount") }
+//        )

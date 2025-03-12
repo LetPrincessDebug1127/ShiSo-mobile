@@ -16,63 +16,80 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.shiso.R
 import utils.LanguageUtils
+import androidx.compose.foundation.Image
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import com.example.shiso.R
 
 @Composable
 fun HomeScreen(navController: NavController) {
     val context = LocalContext.current
     var language by remember { mutableStateOf(LanguageUtils.getCurrentLanguage()) }
 
+    val strings = remember(language) {
+        mapOf(
+            "homescreenLine1" to context.getString(R.string.homescreenLine1),
+            "homescreenLine2" to context.getString(R.string.homescreenLine2),
+            "homescreenLine3" to context.getString(R.string.homescreenLine3),
+            "homescreenLine4" to context.getString(R.string.homescreenLine4),
+            "createAccountButton" to context.getString(R.string.createAccountButton),
+            "alreadyHaveAccount" to context.getString(R.string.alreadyHaveAccount),
+            "loginWithGmail" to context.getString(R.string.loginWithGmail)
+        )
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFFF9F9F9))
+            .background(Color(0xFFEDF9ED))
             .padding(20.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
         ImageHomeScreen1()
         Text(
-            text = context.getString(R.string.homescreenLine1),
+            text = strings["homescreenLine1"] ?: "",
             fontStyle = FontStyle.Italic,
             fontSize = 16.sp,
-            color = Color(0xFF333333)
+            color = Color(0xFF000000)
         )
         ImageHomeScreen2()
         Text(
-            text = context.getString(R.string.homescreenLine2),
+            text = strings["homescreenLine2"] ?: "",
             fontStyle = FontStyle.Italic,
             fontSize = 16.sp,
-            color = Color(0xFF333333)
+            color = Color(0xFF000000)
         )
         Text(
-            text = context.getString(R.string.homescreenLine3),
+            text = strings["homescreenLine3"] ?: "",
             fontStyle = FontStyle.Italic,
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
-            color = Color(0xFF333333)
+            color = Color(0xFF000000)
         )
         Text(
-            text = context.getString(R.string.homescreenLine4),
+            text = strings["homescreenLine4"] ?: "",
             fontStyle = FontStyle.Italic,
             fontSize = 16.sp,
-            color = Color(0xFF333333)
+            color = Color(0xFF000000)
         )
 
         Button(onClick = { navController.navigate("CreateAccount") }) {
-            Text(text = context.getString(R.string.createAccountButton))
+            Text(text = strings["createAccountButton"] ?: "")
         }
 
         Text(
-            text = context.getString(R.string.alreadyHaveAccount),
+            text = strings["alreadyHaveAccount"] ?: "",
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp,
-            color = Color(0xFF248A50),
+            color = Color(0xFF000000),
             modifier = Modifier.clickable { navController.navigate("LogInAccount") }
         )
 
         GoogleLoginButton(
+            buttonText = strings["loginWithGmail"] ?: "",
             onSuccess = { user ->
                 println("Logged in successfully: $user")
                 navController.navigate("CheckSkinScreen")
@@ -81,6 +98,7 @@ fun HomeScreen(navController: NavController) {
                 println("Login failed: $error")
             }
         )
+
 
         Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
             Text(
@@ -107,19 +125,29 @@ fun HomeScreen(navController: NavController) {
     }
 }
 
+
 @Composable
-fun GoogleLoginButton(onSuccess: (String) -> Unit, onError: (String) -> Unit) {
+fun GoogleLoginButton(buttonText: String, onSuccess: (String) -> Unit, onError: (String) -> Unit) {
     Button(onClick = { onSuccess("MockUser") }) {
-        Text("Login with Google")
+        Text(buttonText)
     }
 }
 
+
 @Composable
 fun ImageHomeScreen1() {
-    // Load your image here
+    Image(
+        painter = painterResource(id = R.drawable.homesreen1),
+        contentDescription = "Shiso Homescreen",
+        modifier = Modifier.size(200.dp)
+    )
 }
 
 @Composable
 fun ImageHomeScreen2() {
-    // Load your image here
+    Image(
+        painter = painterResource(id = R.drawable.homescreen2),
+        contentDescription = "Shiso Homescreen",
+        modifier = Modifier.size(200.dp)
+    )
 }

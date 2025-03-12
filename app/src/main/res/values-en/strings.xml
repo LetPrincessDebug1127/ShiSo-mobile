@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">ShiSo</string>
-    <string name="homescreenLine1">Welcome to the app!</string>
-    <string name="homescreenLine2">Your journey begins here.</string>
-    <string name="homescreenLine3">Stay healthy and fit.</string>
-    <string name="homescreenLine4">Join our community.</string>
-    <string name="createAccountButton">Create Account</string>
+    <string name="homescreenLine1">Create a character to fight alongside ShiSo and protect areas of skin damaged by psoriasis, everyone!</string>
+    <string name="homescreenLine2">We will implement</string>
+    <string name="homescreenLine3">natural methods</string>
+    <string name="homescreenLine4">and the safest \'strategies\' together</string>
+    <string name="createAccountButton">Create a ShiSo Account</string>
+    <string name="loginWithGmail">Login with Google</string>
     <string name="alreadyHaveAccount">Already have an account?</string>
+
 </resources>

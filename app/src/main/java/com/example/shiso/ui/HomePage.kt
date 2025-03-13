@@ -23,12 +23,12 @@ import com.example.shiso.R
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.withStyle
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.foundation.text.BasicText
+import android.util.Log
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import com.example.shiso.ui.GoogleLoginButton
 
 @Composable
 fun HomeScreen(navController: NavController) {
@@ -83,17 +83,17 @@ fun HomeScreen(navController: NavController) {
             color = Color(0xFF000000)
         )
         Spacer(modifier = Modifier.height(30.dp))
-        Box(
-            modifier = Modifier
-                .background(Color.Transparent)
-                .clickable { /* Xử lý sự kiện click*/ }
-        ) {
-            BasicText(
-                text = AnnotatedString(strings["loginWithGmail"] ?: ""),
-                style = TextStyle(color = Color(0xFF248A50), fontSize = 20.sp, fontWeight = FontWeight.Bold,
-                ),
-            )
-        }
+        GoogleLoginButton(
+            context = context,
+            onSuccess = { userId ->
+                Log.d("HomePage", "Login Success: $userId")
+                // Chuyển hướng sang màn hình chính sau khi đăng nhập thành công
+//                navController.navigate("MainScreen")
+            },
+            onError = { error ->
+                Log.e("HomePage", "Login Error: $error")
+            }
+        )
         Spacer(modifier = Modifier.height(10.dp))
         Row(modifier = Modifier.align(Alignment.CenterHorizontally)) {
             Text(
@@ -120,14 +120,6 @@ fun HomeScreen(navController: NavController) {
             text = "Test check skin screen",
             modifier = Modifier.clickable { navController.navigate("CheckSkinScreen") }
         )
-    }
-}
-
-
-@Composable
-fun GoogleLoginButton(buttonText: String, onSuccess: (String) -> Unit, onError: (String) -> Unit) {
-    Button(onClick = { onSuccess("MockUser") }) {
-        Text(buttonText)
     }
 }
 
